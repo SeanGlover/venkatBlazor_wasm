@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\venkatBlazor_wasm.Server.props" />
+</Project>

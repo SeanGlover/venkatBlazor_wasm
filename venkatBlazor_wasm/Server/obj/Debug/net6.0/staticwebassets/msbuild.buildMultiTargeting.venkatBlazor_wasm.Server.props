@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\venkatBlazor_wasm.Server.props" />
+</Project>

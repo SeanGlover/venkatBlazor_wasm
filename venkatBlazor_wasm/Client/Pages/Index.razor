@@ -1,0 +1,61 @@
+﻿@page "/"
+@using venkatBlazor_wasm.Shared;
+@using IgniteUI.Blazor.Controls;
+
+<PageTitle>Index</PageTitle>
+
+<IgbDataGrid Height="100%" Width="100%" DataSource="@Employees" HeaderBackground=#00B4D8>
+    <IgbNumericColumn Field=@nameof(Employee.EmployeeId) HeaderText="Id" Width="140" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="0" MinFractionDigits="0" />
+    <IgbTextColumn Field=@nameof(Employee.Gender) HeaderText="Gender" Width="120" />
+    <IgbTextColumn Field=@nameof(Employee.FirstName) HeaderText="First name" Width="120" />
+    <IgbTextColumn Field=@nameof(Employee.LastName) HeaderText="Last name" Width="130"/>
+    <IgbTextColumn Field=@nameof(Employee.Email) HeaderText="Email" Width="110" HorizontalAlignment="CellContentHorizontalAlignment.Center" />
+    <IgbNumericColumn Field=@nameof(Employee.Department.DepartmentName) HeaderText="Department" Width="110" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="0" MinFractionDigits="0" />
+    <IgbDateTimeColumn Field=@nameof(Employee.DateOfBirth) HeaderText="Date of birth" Width="150" DateTimeFormat="DateTimeFormats.DateShort" />
+</IgbDataGrid>
+
+@code{
+    public List<Employee> Employees { get; set; } = new List<Employee>();
+    protected override void OnInitialized()
+    {
+        Employees = LoadEmployeeData();
+        base.OnInitialized();
+    }
+    private List<Employee> LoadEmployeeData()
+    {
+        Employee e1 = new Employee()
+            {
+                EmployeeId = 1,
+                Gender = Gender.Male,
+                FirstName = "John",
+                LastName = "Hastings",
+                Email = "john@pragimtech.com",
+                DateOfBirth = new DateTime(1966, 10, 21),
+                Department = new Department() { DepartmentId = 1, DepartmentName = "IT" },
+                PhotoPath = @"C:\Users\SeanGlover"
+            };
+        Employee e2 = new Employee()
+            {
+                EmployeeId = 2,
+                Gender = Gender.Female,
+                FirstName = "Sara",
+                LastName = "Connor",
+                Email = "sara@pragimtech.com",
+                DateOfBirth = new DateTime(1970, 9, 23),
+                Department = new Department() { DepartmentId = 2, DepartmentName = "Admin" },
+                PhotoPath = @"C:\Users\SeanGlover"
+            };
+        Employee e3 = new Employee()
+            {
+                EmployeeId = 3,
+                Gender = Gender.Other,
+                FirstName = "Bert",
+                LastName = "Humperdink",
+                Email = "bert@pragimtech.com",
+                DateOfBirth = new DateTime(1985, 3, 21),
+                Department = new Department() { DepartmentId = 3, DepartmentName = "HR" },
+                PhotoPath = @"C:\Users\SeanGlover"
+            };
+        return new List<Employee>() { e1, e2, e3 };
+    }
+}
